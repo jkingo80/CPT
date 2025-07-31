@@ -6,6 +6,16 @@ const PORT = process.env.PORT || 3001;
 
 // Enable CORS so your frontend can access it
 app.use(cors());
+app.use(express.json());
+
+// Root route - shows that the server is running
+app.get('/', (req, res) => {
+  res.json({ 
+    message: 'Crypto Backend Server is running!', 
+    endpoints: ['/api/prices'],
+    status: 'active'
+  });
+});
 
 // Simple endpoint to get all prices
 app.get('/api/prices', async (req, res) => {
@@ -19,6 +29,6 @@ app.get('/api/prices', async (req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
+  console.log(`Server running on port ${PORT}`);
   console.log(`Get prices at: http://localhost:${PORT}/api/prices`);
 });
